@@ -1,0 +1,6 @@
+images
+movies
+*.txt
+.DS_Store
+__pycache__
+debug.log
