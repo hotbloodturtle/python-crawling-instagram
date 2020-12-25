@@ -31,6 +31,12 @@ EXISTING_LIST_DIR = './existing_list/'
 if not os.path.exists(EXISTING_LIST_DIR):
     os.makedirs(EXISTING_LIST_DIR)
 
+MYPAGE_LIST_DIR = './mypage_list/'
+if not os.path.exists(MYPAGE_LIST_DIR):
+    os.makedirs(MYPAGE_LIST_DIR)
+    f = open(f'{MYPAGE_LIST_DIR}mylist.txt', 'w')
+    f.close()
+
 # os환경에 맞게 크롬드라이버 경로 세팅, os.name == 'nt'면 windows
 if os.name == 'nt':
     DRIVER_DIR = './chromedriver/chromedriver.exe'

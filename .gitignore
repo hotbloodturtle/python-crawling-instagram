@@ -1,6 +1,8 @@
 images
 movies
-*.txt
 .DS_Store
 __pycache__
 debug.log
+mypage_list
+new_list
+existing_list
