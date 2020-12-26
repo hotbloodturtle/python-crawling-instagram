@@ -40,8 +40,8 @@ while True:
     body.send_keys(Keys.END)
     time.sleep(2)
 
-    # if s_count == 3:
-    #     break
+    if s_count == 3:
+        break
 
     # 마지막 스크롤인지 체크
     new_height = driver.execute_script('return document.body.scrollHeight')
