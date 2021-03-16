@@ -34,14 +34,10 @@ for line in lines:
 f.close()
 
 image_src_list = []
-s_count = 0
 
 while True:
     body.send_keys(Keys.END)
     time.sleep(2)
-
-    if s_count == 1:
-        break
 
     # 마지막 스크롤인지 체크
     new_height = driver.execute_script('return document.body.scrollHeight')
@@ -61,8 +57,6 @@ while True:
         except Exception as e:
             print(str(e))
             continue
-
-    s_count += 1
 
 
 f = open(f'{MYPAGE_LIST_DIR}mylist.txt', 'a')
