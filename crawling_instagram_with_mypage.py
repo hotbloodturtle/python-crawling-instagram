@@ -18,32 +18,17 @@ element_password.submit()
 
 time.sleep(5)
 driver.get(f'https://www.instagram.com/{USERNAME}/saved/')
+time.sleep(5)
 
 # txt 파일에 detail page url 전부 저장
 body = driver.find_element_by_tag_name('body')
 last_height = driver.execute_script('return document.body.scrollHeight')
-urls = []
-
-
-f = open(f'{MYPAGE_LIST_DIR}mylist.txt', 'r')
-lines = f.readlines()
-existring_src_list = []
-for line in lines:
-    value = line.replace('\n', '')
-    existring_src_list.append(value)
-f.close()
 
 image_src_list = []
 
 while True:
     body.send_keys(Keys.END)
-    time.sleep(2)
-
-    # 마지막 스크롤인지 체크
-    new_height = driver.execute_script('return document.body.scrollHeight')
-    if new_height == last_height:
-        break
-    last_height = new_height
+    time.sleep(5)
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -51,15 +36,16 @@ while True:
     for image_tag in image_tag_list:
         try:
             image_tag_src = image_tag['src']
-            if image_tag_src in existring_src_list or image_tag_src in image_src_list:
-                continue
             image_src_list.append(image_tag_src)
         except Exception as e:
             print(str(e))
             continue
 
-
-f = open(f'{MYPAGE_LIST_DIR}mylist.txt', 'a')
+    # 마지막 스크롤인지 체크
+    new_height = driver.execute_script('return document.body.scrollHeight')
+    if new_height == last_height:
+        break
+    last_height = new_height
 
 
 # image file save
@@ -70,7 +56,6 @@ for image_src in image_src_list:
             image_src,
             f'{IMAGES_DIR}{file_name}.png'
         )
-        f.write(f'{image_src}\n')
     except Exception as e:
         print(str(e))
         continue
@@ -78,5 +63,4 @@ for image_src in image_src_list:
 
 # exit
 time.sleep(1)
-f.close()
 driver.close()
